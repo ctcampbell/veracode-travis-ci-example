@@ -8,7 +8,11 @@ script:
   - zip veracode.zip bad_file.py
 
 after_success:
-  - java -jar vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -vid $VID -vkey $VKEY -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip -version $TRAVIS_JOB_ID
+  - java -jar vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -vid $VID -vkey $VKEY
+    -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip
+    -version $TRAVIS_JOB_ID
 
 notifications:
-  slack: ctcampbell:$SLACK_KEY
+  slack:
+    rooms:
+      - secure: F3CFKCo11HAXE+7GZfO46cl1JCHvzw9MtRMNH0nv1uqs4Zh7bid8kBJUdEvu7RdvmZr1r+XPrWk9L6LDQAmuUa48uIBlRo6cwcAJabMbv/ukwS9KFdzVOU3DRqLEoiwrb+deNHg7lB7mwzmAL/Gvnr8aPQNhP9gXT1wWjk3DXFGofaZ9xYASQ5l2kqz8D5ojh7qvqloN2rg6Lnnpamj91tE2e6GESK78RTkWmxwPFOr7cj4onWplw7tLHnNMaOjudYacoXDd2JEYAfVkMdmyyllvJ15AMBdQG6G9YB7MlzHtCj4E7+3YXOME0PI7Cb9BLwGJlVPAbKyizKtashNqMVXQ7jIVWWffb8auGumh6rtE2JAc2HMXNYRpxSkGBssFHosK56NAWwcfgf2LOH+E9LcMZV+t1derimzjdGXOSySEojAOQ4y/hVSj9wljC/ZT0I0krF52xqhC5jgoIksqvfy+X0kpqoh6NxGU6o3rD0gI6l/2rqMw3smRNgRb9IRZJcEtY/+Au6Y4J8Av4t1/TKiK1d/XBBjzpfvrniQgaRWc57GyljeeGDs3XEJaPjNKd0oNFnY/F4WPtUPM7t85b4Ny4N1HTp0nKnIjwr4P9IKCuB0Bw2ozwGhF9+jy2152KZBQycBlOIIkmexBoTgAXj5nYid3evH/H7J8TaSqzdY=
