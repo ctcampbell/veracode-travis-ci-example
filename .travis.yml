@@ -9,3 +9,6 @@ script:
 
 after_success:
   - java -jar vosp-api-wrappers-java-17.11.4.9.jar -vid $VID -vkey $VKEY -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip -version $TRAVIS_JOB_ID
+
+notifications:
+  slack: ctcampbell:$SLACK_KEY
