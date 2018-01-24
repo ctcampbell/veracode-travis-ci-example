@@ -1,0 +1,11 @@
+sudo: false
+dist: trusty
+
+before_install:
+  - wget https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/17.11.4.9/vosp-api-wrappers-java-17.11.4.9.jar
+
+script:
+  - zip veracode.zip bad_file.py
+
+after_success:
+  - java -jar vosp-api-wrappers-java-17.11.4.9.jar -vid $VID -vkey $VKEY -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip -version $TRAVIS_JOB_ID
