@@ -10,7 +10,7 @@ script:
 after_success:
   - java -jar vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -vid $VID -vkey $VKEY
     -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip
-    -version "$TRAVIS_JOB_ID - $TRAVIS_JOB_NUMBER"
+    -version "$TRAVIS_JOB_ID - $TRAVIS_JOB_NUMBER ${date}"
 
 notifications:
   slack:
