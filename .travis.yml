@@ -10,8 +10,6 @@ before_install:
   
 script:
   - zip veracode.zip bad_file.py
-
-after_success:
   - java -jar vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -vid $VID -vkey $VKEY
     -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip
     -version "$TRAVIS_JOB_ID - $TRAVIS_JOB_NUMBER $DATE" -scantimeout 3600
