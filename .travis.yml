@@ -6,14 +6,15 @@ env:
 
 before_install:
   - wget https://repo1.maven.org/maven2/com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/$VERACODE_WRAPPER_VERSION/vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar
-
+  - sha1sum -c <<< "$VERACODE_WRAPPER_SHA1 vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar"
+  
 script:
   - zip veracode.zip bad_file.py
 
 after_success:
   - java -jar vosp-api-wrappers-java-$VERACODE_WRAPPER_VERSION.jar -vid $VID -vkey $VKEY
     -action uploadandscan -appname travis-ci-example -createprofile true -filepath veracode.zip
-    -version "$TRAVIS_JOB_ID - $TRAVIS_JOB_NUMBER $DATE"
+    -version "$TRAVIS_JOB_ID - $TRAVIS_JOB_NUMBER $DATE" -scantimeout 3600
 
 notifications:
   slack:
